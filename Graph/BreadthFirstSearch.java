@@ -4,24 +4,24 @@ import java.util.Scanner;
 import java.util.LinkedList;
 
 /**
- * Title:¹ã¶ÈÓÅÏÈËÑË÷£¬ÁÚ½Ó±íÊµÏÖ
- * Description:´ÓÆğÊ¼µã¿ªÊ¼£¬ÕÒ³öÒ»ÌõÄÜ±éÀúÍ¼ÖĞËùÓĞ¶¥µãµÄ×î¶ÌÂ·¾¶¡£Èô²»Îª¼ÓÈ¨Í¼£¬ÔòÕâÌõ×î¶ÌÂ·¾¶Ëù±éÀúµ½µÄ¶¥µãÊı×îÉÙ
+ * Title:å¹¿åº¦ä¼˜å…ˆæœç´¢ï¼Œé‚»æ¥è¡¨å®ç°
+ * Description:ä»èµ·å§‹ç‚¹å¼€å§‹ï¼Œæ‰¾å‡ºä¸€æ¡èƒ½éå†å›¾ä¸­æ‰€æœ‰é¡¶ç‚¹çš„æœ€çŸ­è·¯å¾„ã€‚è‹¥ä¸ä¸ºåŠ æƒå›¾ï¼Œåˆ™è¿™æ¡æœ€çŸ­è·¯å¾„æ‰€éå†åˆ°çš„é¡¶ç‚¹æ•°æœ€å°‘
  * @author lyl
- * @date 2018Äê9ÔÂ24ÈÕ
+ * @date 2018å¹´9æœˆ24æ—¥
  */
 public class BreadthFirstSearch<Item> {
 
     private final int Max_Size = 1000;
 
-    private Item[] V;// ´æ´¢¶¥µã
+    private Item[] V;// å­˜å‚¨é¡¶ç‚¹
 
-    private Item[][] E;// ´æ´¢±ß
+    private Item[][] E;// å­˜å‚¨è¾¹
 
-    private boolean[] isVisited;// ±ê¼ÇÄ³¸ö¶¥µãÊÇ·ñÒÑ¾­±»·ÃÎÊ¹ı
+    private boolean[] isVisited;// æ ‡è®°æŸä¸ªé¡¶ç‚¹æ˜¯å¦å·²ç»è¢«è®¿é—®è¿‡
 
-    private int Vcount, Ecount;// ¶¥µãÊıºÍ±ßÊı
+    private int Vcount, Ecount;// é¡¶ç‚¹æ•°å’Œè¾¹æ•°
 
-    private int[][] adj;// ÎŞÏòÍ¼µÄÁ¬½Ó¾ØÕó
+    private int[][] adj;// æ— å‘å›¾çš„è¿æ¥çŸ©é˜µ
 
     public BreadthFirstSearch(Item[] V, Item[][] E) {
 
@@ -31,27 +31,23 @@ public class BreadthFirstSearch<Item> {
         this.Ecount = E.length;
     }
 
-    // ¸ù¾İÏÂ±ê»ñÈ¡¶¥µã
+    // æ ¹æ®ä¸‹æ ‡è·å–é¡¶ç‚¹
     Item getItem(int w) {
-
         return V[w];
     }
 
     int getV() {
-
         return Vcount;
     }
 
     int getE() {
-
         return Ecount;
     }
 
-    // ³õÊ¼»¯ÁÚ½Ó¾ØÕóadj;
+    // åˆå§‹åŒ–é‚»æ¥çŸ©é˜µadj;
     void init() {
 
         adj = new int[Vcount][Vcount];
-
         for (int i = 0; i < adj.length; i++)
             for (int j = 0; j < adj[i].length; j++)
                 if (i == j)
@@ -62,7 +58,7 @@ public class BreadthFirstSearch<Item> {
         isVisited = new boolean[Vcount];
     }
 
-    // »ñµÃ¶¥µãµÄÏÂ±ê
+    // è·å¾—é¡¶ç‚¹çš„ä¸‹æ ‡
     int getPosition(Item item) {
 
         for (int i = 0; i < V.length; i++)
@@ -72,7 +68,7 @@ public class BreadthFirstSearch<Item> {
         return -1;
     }
 
-    // »ñÈ¡Ä³¸ö¶¥µãµÄµÚÒ»¸öÁÚ½ÓµãµÄÏÂ±ê
+    // è·å–æŸä¸ªé¡¶ç‚¹çš„ç¬¬ä¸€ä¸ªé‚»æ¥ç‚¹çš„ä¸‹æ ‡
     int getFirstNeighbor(Item item) {
 
         int index = this.getPosition(item);
@@ -84,7 +80,7 @@ public class BreadthFirstSearch<Item> {
         return -1;
     }
 
-    // »ñÈ¡Ä³¸ö¶¥µãµÄµÚ¶ş¸öÁÚ½ÓµãµÄÏÂ±ê
+    // è·å–æŸä¸ªé¡¶ç‚¹çš„ç¬¬äºŒä¸ªé‚»æ¥ç‚¹çš„ä¸‹æ ‡
     int getNextNeighbor(Item item, int v) {
 
         int w = this.getPosition(item);
@@ -97,11 +93,10 @@ public class BreadthFirstSearch<Item> {
 
     }
 
-    // ÍêÉÆÁÚ½Ó¾ØÕó
+    // å®Œå–„é‚»æ¥çŸ©é˜µ
     void setADJ() {
 
         int index1, index2;
-
         int j = 0;
 
         for (int i = 0; i < E.length; i++) {
@@ -115,7 +110,7 @@ public class BreadthFirstSearch<Item> {
 
     }
 
-    // ÊµÏÖ¹ã¶ÈÓÅÏÈËÑËØ
+    // å®ç°å¹¿åº¦ä¼˜å…ˆæœç´ 
     public void broadFirstSearch() {
 
         isVisited = new boolean[V.length];
@@ -133,24 +128,22 @@ public class BreadthFirstSearch<Item> {
 
         Item item1 = this.getItem(i);
 
-        System.out.println("·ÃÎÊµ½ÁË" + item1 + "¶¥µã");
+        System.out.println("è®¿é—®åˆ°äº†" + item1 + "é¡¶ç‚¹");
         isVisited[i] = true;
-        queue.add(item1);// µÚÒ»´Î°Ñv0¼Óµ½¶ÓÁĞ
+        queue.add(item1);// ç¬¬ä¸€æ¬¡æŠŠv0åŠ åˆ°é˜Ÿåˆ—
 
         while (!queue.isEmpty()) {
-
             u = queue.removeFirst();
             System.out.println("u="+u);
             if(queue.isEmpty())
-                System.out.println("¶ÓÁĞÒÑ¿Õ");
+                System.out.println("é˜Ÿåˆ—å·²ç©º");
             w = this.getFirstNeighbor(item1);
             System.out.println("w1="+w);
             while (w != -1) {
 
                 if (!isVisited[w]) {
-
                     Item item2 = this.getItem(w);
-                    System.out.println("·ÃÎÊµ½ÁË" + item2 + "¶¥µã");
+                    System.out.println("è®¿é—®åˆ°äº†" + item2 + "é¡¶ç‚¹");
                     isVisited[w] = true;
                     queue.add(item2);
                 }
@@ -174,7 +167,7 @@ public class BreadthFirstSearch<Item> {
         graph.init();
         graph.setADJ();
 
-        System.out.println("¹ã¶ÈÓÅÏÈËÑËØÈçÏÂ");
+        System.out.println("å¹¿åº¦ä¼˜å…ˆæœç´ å¦‚ä¸‹");
         graph.broadFirstSearch();
         
     }
